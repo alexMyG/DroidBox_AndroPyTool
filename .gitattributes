@@ -1,0 +1,2 @@
+images/system.img filter=lfs diff=lfs merge=lfs -text
+images/ramdisk.img filter=lfs diff=lfs merge=lfs -text
