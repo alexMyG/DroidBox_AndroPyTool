@@ -31,7 +31,7 @@ The next steps will allow you to install Android SDK in Non-GUI mode:
     ```sh
     $ source ~/.bashrc
     ```
- 
+**2. We have to install the Android 16 package**
 - Let's install Android 16, which is the version supported by DroidBox (the platform and system image):
 
     ```sh
@@ -39,13 +39,12 @@ The next steps will allow you to install Android SDK in Non-GUI mode:
     $ echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-16
     $ echo "y" | android update sdk -a --no-ui --filter platform-tools,tools
     ```
-
+**3. Let's prepare DroidBox**
 - Now we can start with DroidBox. First, you have to download this repo:
    ```sh
     $ cd
     $ git clone https://github.com/alexMyG/DroidBox-AndroPyTool
     ``` 
- 
 - We need to create the device (select **no** when asking if you wish a custom hardware profile):
     ```sh
     $ cd DroidBox-AndroPyTool/
@@ -66,11 +65,10 @@ The next steps will allow you to install Android SDK in Non-GUI mode:
     $ source droidbox_env/bin/activate
     ```
 - The following Python libraries are required:
-    
     ```sh
     $ pip install -r requirements.txt
     ```
-
+**4. Now we can run DroidBox**
 - If everything was OK, we can now run DroidBox:
     ```sh
     python fork_droidbox.py <PATH_TO_FOLDER_WITH_APKS> <TIME_IN_SECONDS> <GUI_MODE:_False_or_True>
