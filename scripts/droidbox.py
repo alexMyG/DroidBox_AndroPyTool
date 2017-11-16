@@ -32,12 +32,14 @@ import shutil
 import subprocess
 import time
 import hashlib
+import os
 
 from threading import Thread
 from xml.dom import minidom
 from subprocess import call, PIPE, Popen
 from utils import AXMLPrinter
 from pylab import *
+
 
 
 sendsms = {}

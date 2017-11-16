@@ -1,0 +1,1 @@
+strace -p 36 -f -ttF -o /sdcard/750801c371e0f34ede7c15948f147fca7641dba3c948862817b8d96d6c7191a5.apk_strace_monkey.txt
