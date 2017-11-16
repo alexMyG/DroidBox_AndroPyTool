@@ -25,7 +25,6 @@ The next steps will allow you to install Android SDK in Non-GUI mode:
     export ANDROID_HOME=$HOME/android-sdk-linux/
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/platform-tools
-
     ```
 - Load the libraries in the current session with:
 
@@ -53,7 +52,7 @@ The next steps will allow you to install Android SDK in Non-GUI mode:
     $ ./createDroidBoxDevice.sh
     ```
 - Scripts need the correct permissions:
-    ````
+    ```
     $ chmod 744 *.sh
     ```
 - This repo requires several Python libraries. We recommend you to use a Virtual Environment. If you do not want, go to next step:
