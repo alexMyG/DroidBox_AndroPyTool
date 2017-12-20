@@ -8,7 +8,10 @@ from os import listdir
 from termcolor import colored
 from scripts import droidbox
 
-os.chdir(os.path.realpath(__file__))
+
+current_directory = os.path.dirname(os.path.realpath(__file__))
+
+os.chdir(current_directory)
 
 
 deviceId = "droidbox-emulator"
