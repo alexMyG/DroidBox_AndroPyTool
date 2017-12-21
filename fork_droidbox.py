@@ -98,7 +98,8 @@ def analyze_with_droidbox(apks_folders, duration, GUI):
             else:
                 print "Boot not completed"
                 time.sleep(1)
-            p = subprocess.Popen(["adb", "shell", "getprop", "sys.boot_completed"], stdout=subprocess.PIPE)
+            #p = subprocess.Popen(["adb", "shell", "getprop", "sys.boot_completed"], stdout=subprocess.PIPE)
+            p=subprocess.Popen(["adb", "devices"], stdout=subprocess.PIPE)
             output = p.stdout.read()
 
         print "Boot completed !"
