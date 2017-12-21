@@ -5,7 +5,7 @@ import fire
 import os
 from os.path import isfile, join, isdir
 from os import listdir
-from termcolor import colored
+#from termcolor import colored
 from scripts import droidbox
 
 
@@ -75,14 +75,16 @@ def analyze_with_droidbox(apks_folders, duration, GUI):
         print "\nStarting emulator "
         p = None
         if not GUI:
-            print colored('STARTING ' + ' EMULATOR IN NON GUI MODE...', 'green')
+            #print colored('STARTING ' + ' EMULATOR IN NON GUI MODE...', 'green')
+            print 'STARTING ' + ' EMULATOR IN NON GUI MODE...'
 
             subprocess.Popen(["./startemuNoGUI.sh", deviceId])
 
             print "ADB DEVICE RUNNING "
 
         else:
-            print colored('STARTING ' + ' EMULATOR IN GUI MODE...', 'green')
+            # print colored('STARTING ' + ' EMULATOR IN GUI MODE...', 'green')
+            print 'STARTING ' + ' EMULATOR IN GUI MODE...'
             subprocess.Popen(["./startemu.sh", deviceId])
 
         print "subprocess called"
