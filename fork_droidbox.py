@@ -9,17 +9,16 @@ from os import listdir
 from scripts import droidbox
 
 
-current_directory = os.path.dirname(os.path.realpath(__file__))
+# current_directory = os.path.dirname(os.path.realpath(__file__))
 
-os.chdir(current_directory)
+# os.chdir(current_directory)
 
 
 deviceId = "droidbox-emulator"
 
 strace_analysis = True
 
-print "Killing current active emulators..."
-subprocess.Popen(["./killAllEmulators.sh"])
+
 
 can_break = False
 
@@ -34,22 +33,32 @@ def sigint_handler(signal, frame):
 signal.signal(signal.SIGINT, sigint_handler)
 
 
-def analyze_with_droidbox(apks_folders, duration, GUI):
+def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
+    current_directory = os.path.dirname(os.path.realpath(__file__))
 
-    logs_directory = "logs_outputs_" + filter(None, apks_folders.split("/"))[-1] + "/"
-    print "LOGS DIRECTORY: " + apks_folders
-    print "LOGS DIRECTORY: " + logs_directory
+    os.chdir(current_directory)
+
+    print "Killing current active emulators..."
+    subprocess.Popen(["./killAllEmulators.sh"])
+
+    # output_directory = "logs_outputs_" + filter(None, apks_folders.split("/"))[-1] + "/"
 
     apks_folders += "/"
 
-    if not os.path.exists(logs_directory):
-        os.makedirs(logs_directory)
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
 
     list_folders = [f for f in listdir(apks_folders) if isdir(join(apks_folders, f))]
 
     print "NUM APKS FOUND: " + str(len(list_folders))
 
     apk_list = [f for f in listdir(apks_folders) if isfile(join(apks_folders, f)) and f.endswith(".apk")]
+
+    apk_list = []
+    for path, subdirs, files in os.walk(apks_folders):
+        for name in files:
+            if name.endswith(".apk"):
+                apk_list.append(os.path.join(path, name))
 
     count = 0
     for apk_name in apk_list:
@@ -64,17 +73,17 @@ def analyze_with_droidbox(apks_folders, duration, GUI):
         log_file_name = "logcat_" + apk_id.replace(".apk", ".txt")
         json_file_name = "analysis_" + apk_id.replace(".apk", ".json")
 
-        if isfile(join(logs_directory, log_file_name)) or isfile(join(logs_directory, json_file_name)):
-            print "EXISTS: " + logs_directory + log_file_name
+        if isfile(join(output_directory, log_file_name)) or isfile(join(output_directory, json_file_name)):
+            print "EXISTS: " + output_directory + log_file_name
             print "!! APK already analysed: " + apk_name
             continue
 
-        file_output_log = open(logs_directory + log_file_name, "w")
-        file_output_json = open(logs_directory + json_file_name, "w")
+        file_output_log = open(output_directory + log_file_name, "w")
+        file_output_json = open(output_directory + json_file_name, "w")
 
         print "\nStarting emulator "
         p = None
-        if not GUI:
+        if not gui:
             #print colored('STARTING ' + ' EMULATOR IN NON GUI MODE...', 'green')
             print 'STARTING ' + ' EMULATOR IN NON GUI MODE...'
 
@@ -106,7 +115,7 @@ def analyze_with_droidbox(apks_folders, duration, GUI):
         print "Boot completed !"
 
         print "Calling droidbox..."
-        output_log, output_json = droidbox.execute_droidbox(["", apks_folders + apk_name, duration], logs_directory=logs_directory)
+        output_log, output_json = droidbox.execute_droidbox(["", apk_name, duration], logs_directory=output_directory)
 
         file_output_log.write(output_log)
         file_output_log.close()
