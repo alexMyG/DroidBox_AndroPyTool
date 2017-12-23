@@ -1,7 +1,6 @@
 import sys, signal
 import subprocess
 import time
-import fire
 import os
 from os.path import isfile, join, isdir
 from os import listdir
@@ -33,6 +32,28 @@ def sigint_handler(signal, frame):
 signal.signal(signal.SIGINT, sigint_handler)
 
 
+def main():
+    parser = argparse.ArgumentParser(
+        description=colored("Welcome to AndroPyTool\n\n", "green") +
+                    '[!] You must provide the source directory where apks are contained. ',
+        formatter_class=RawTextHelpFormatter)
+
+    parser.add_argument('-s', '--source', help='Source directory for APKs', required=True)
+
+    parser.add_argument('-s', '--duration', help='DroidBox analysis duration', required=True)
+
+    parser.add_argument('-s', '--output', help='Output directory for results', required=True)
+
+    parser.add_argument('-s', '--gui', help='GUI Mode: True or False', required=True)
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+
+    args = parser.parse_args()
+    analyze_with_droidbox(args.source, args.duration, args.output, args.gui)
+
+
 def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
@@ -52,7 +73,7 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
 
     print "NUM APKS FOUND: " + str(len(list_folders))
 
-    apk_list = [f for f in listdir(apks_folders) if isfile(join(apks_folders, f)) and f.endswith(".apk")]
+    # apk_list = [f for f in listdir(apks_folders) if isfile(join(apks_folders, f)) and f.endswith(".apk")]
 
     apk_list = []
     for path, subdirs, files in os.walk(apks_folders):
@@ -132,4 +153,4 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
 
 
 if __name__ == '__main__':
-    fire.Fire(analyze_with_droidbox)
+    main()
