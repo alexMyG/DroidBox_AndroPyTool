@@ -6,7 +6,8 @@ from os.path import isfile, join, isdir
 from os import listdir
 #from termcolor import colored
 from scripts import droidbox
-
+import argparse
+from argparse import RawTextHelpFormatter
 
 # current_directory = os.path.dirname(os.path.realpath(__file__))
 
@@ -34,17 +35,17 @@ signal.signal(signal.SIGINT, sigint_handler)
 
 def main():
     parser = argparse.ArgumentParser(
-        description=colored("Welcome to AndroPyTool\n\n", "green") +
+        description="Welcome to AndroPyTool\n\n" +
                     '[!] You must provide the source directory where apks are contained. ',
         formatter_class=RawTextHelpFormatter)
 
     parser.add_argument('-s', '--source', help='Source directory for APKs', required=True)
 
-    parser.add_argument('-s', '--duration', help='DroidBox analysis duration', required=True)
+    parser.add_argument('-d', '--duration', help='DroidBox analysis duration', required=True)
 
-    parser.add_argument('-s', '--output', help='Output directory for results', required=True)
+    parser.add_argument('-o', '--output', help='Output directory for results', required=True)
 
-    parser.add_argument('-s', '--gui', help='GUI Mode: True or False', required=True)
+    parser.add_argument('-g', '--gui', help='GUI Mode: True or False', required=True)
 
     if len(sys.argv) == 1:
         parser.print_help()
