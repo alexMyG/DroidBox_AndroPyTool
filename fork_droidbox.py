@@ -45,7 +45,11 @@ def main():
 
     parser.add_argument('-o', '--output', help='Output directory for results', required=True)
 
-    parser.add_argument('-g', '--gui', help='GUI Mode: True or False', required=True)
+    parser.add_argument('--gui', dest='gui', action='store_true')
+    parser.add_argument('--no-gui', dest='gui', action='store_false')
+    parser.set_defaults(feature=False)
+
+    # parser.add_argument('-g', '--gui', help='GUI Mode: True or False', required=True)
 
     if len(sys.argv) == 1:
         parser.print_help()
