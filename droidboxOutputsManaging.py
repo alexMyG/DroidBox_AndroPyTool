@@ -29,7 +29,10 @@ def main():
         sys.exit(1)
     args = parser.parse_args()
 
-    parse_droidbox_outputs(args.source)
+    parse_droidbox_outputs(source_folder=args.source,
+                           output_droidbox=args.output,
+                           output_strace=args.outputStrace,
+                           output_other=args.otherFiles)
 
 
 def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output_other):
