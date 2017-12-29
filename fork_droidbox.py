@@ -80,11 +80,7 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
 
     # apk_list = [f for f in listdir(apks_folders) if isfile(join(apks_folders, f)) and f.endswith(".apk")]
 
-    apk_list = []
-    for path, subdirs, files in os.walk(apks_folders):
-        for name in files:
-            if name.endswith(".apk"):
-                apk_list.append(os.path.join(path, name))
+ c
 
     count = 0
     for apk_name in apk_list:
