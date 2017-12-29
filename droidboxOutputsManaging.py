@@ -1,3 +1,7 @@
+import sys
+from argparse import RawTextHelpFormatter
+
+import argparse
 from os import listdir
 import re
 import better_exceptions
