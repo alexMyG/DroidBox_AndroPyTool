@@ -69,7 +69,7 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
                 line = re.sub(" +", " ", line)
                 line = line.split(" ", 2)
 
-                content = {"process_number": line[0], "system_call": line[2]}
+                # content = {"process_number": line[0], "system_call": line[2]}
                 # TIMESTAMP is the key and it includes the process number and the system call
 
                 fp.write(line[1] + "," + line[0] + "," + line[2])
