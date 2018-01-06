@@ -41,12 +41,11 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
     list_files = []
     for path, subdirs, files in os.walk(source_folder):
         for name in files:
-            if name.endswith(".apk"):
-                list_files.append(os.path.join(path, name))
+            list_files.append(os.path.join(path, name))
 
-    list_droidbox_files = [f for f in list_files if f.startswith("analysis")]
-    list_strace_files = [f for f in list_files if f.startswith("strace")]
-    list_logcat_files = [f for f in list_files if f.startswith("logcat")]
+    list_droidbox_files = [f for f in list_files if ntpath.basename(f).startswith("analysis")]
+    list_strace_files = [f for f in list_files if ntpath.basename(f).startswith("strace")]
+    list_logcat_files = [f for f in list_files if ntpath.basename(f).startswith("logcat")]
 
     if not os.path.exists(output_droidbox):
         os.makedirs(output_droidbox)
