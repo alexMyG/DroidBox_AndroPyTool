@@ -60,13 +60,15 @@ def main():
 
 
 def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
+    subprocess.Popen(["adb", "devices"], stdout=subprocess.PIPE)
+
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
     os.chdir(current_directory)
 
     print "Killing current active emulators..."
     subprocess.Popen(["./killAllEmulators.sh"])
-
+    print "CONTTTT"
     # output_directory = "logs_outputs_" + filter(None, apks_folders.split("/"))[-1] + "/"
 
     apks_folders += "/"
@@ -74,13 +76,14 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
 
-    list_folders = [f for f in listdir(apks_folders) if isdir(join(apks_folders, f))]
+    # list_folders = [f for f in listdir(apks_folders) if isdir(join(apks_folders, f))]
+    apk_list = []
+    for path, subdirs, files in os.walk(apks_folders):
+        for name in files:
+            if name.endswith(".apk"):
+                apk_list.append(os.path.join(path, name))
 
-    print "NUM APKS FOUND: " + str(len(list_folders))
-
-    # apk_list = [f for f in listdir(apks_folders) if isfile(join(apks_folders, f)) and f.endswith(".apk")]
-
- c
+    print "NUM APKS FOUND: " + str(len(apk_list))
 
     count = 0
     for apk_name in apk_list:
