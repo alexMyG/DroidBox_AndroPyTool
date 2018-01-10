@@ -43,10 +43,9 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
         for name in files:
             list_files.append(os.path.join(path, name))
 
-
-    list_droidbox_files = [f for f in list_files if f.startswith("analysis")]
-    list_strace_files = [f for f in list_files if f.startswith("strace")]
-    list_logcat_files = [f for f in list_files if f.startswith("logcat")]
+    list_droidbox_files = [f for f in list_files if ntpath.basename(f).startswith("analysis")]
+    list_strace_files = [f for f in list_files if ntpath.basename(f).startswith("strace")]
+    list_logcat_files = [f for f in list_files if ntpath.basename(f).startswith("logcat")]
 
     if not os.path.exists(output_droidbox):
         os.makedirs(output_droidbox)
@@ -70,7 +69,7 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
                 line = re.sub(" +", " ", line)
                 line = line.split(" ", 2)
 
-                content = {"process_number": line[0], "system_call": line[2]}
+                # content = {"process_number": line[0], "system_call": line[2]}
                 # TIMESTAMP is the key and it includes the process number and the system call
 
                 fp.write(line[1] + "," + line[0] + "," + line[2])
