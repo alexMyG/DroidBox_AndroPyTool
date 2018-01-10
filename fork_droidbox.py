@@ -68,7 +68,6 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
 
     print "Killing current active emulators..."
     subprocess.Popen(["./killAllEmulators.sh"])
-    print "CONTTTT"
     # output_directory = "logs_outputs_" + filter(None, apks_folders.split("/"))[-1] + "/"
 
     apks_folders += "/"
@@ -83,7 +82,7 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
             if name.endswith(".apk"):
                 apk_list.append(os.path.join(path, name))
 
-    print "NUM APKS FOUND: " + str(len(apk_list))
+    #print "NUM APKS FOUND: " + str(len(apk_list))
 
     count = 0
     for apk_name in apk_list:

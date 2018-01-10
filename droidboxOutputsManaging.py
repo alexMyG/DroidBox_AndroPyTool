@@ -58,7 +58,7 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
 
     # STRACE
     for file in list_strace_files:
-        output_file = ntpath.basename(file).replace(".txt", ".csv")
+        output_file = ntpath.basename(file).replace(".txt", ".csv").replace("strace_", "").replace(".apk", "")
         with open(file, "rb") as f:
             lines = f.readlines()
 
@@ -69,16 +69,13 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
                 line = re.sub(" +", " ", line)
                 line = line.split(" ", 2)
 
-                # content = {"process_number": line[0], "system_call": line[2]}
-                # TIMESTAMP is the key and it includes the process number and the system call
-
                 fp.write(line[1] + "," + line[0] + "," + line[2])
 
         shutil.move(file, join_dir(output_other, file))
 
     # Droidbox
     for file in list_droidbox_files:
-        output_file = ntpath.basename(file)
+        output_file = ntpath.basename(file).replace("analysis_", "")
         shutil.move(file, join_dir(output_droidbox, output_file))
 
     # Logcat
