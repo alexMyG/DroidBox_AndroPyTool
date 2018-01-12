@@ -4,7 +4,6 @@ import time
 import os
 from os.path import isfile, join, isdir
 from os import listdir
-#from termcolor import colored
 from scripts import droidbox
 import argparse
 from argparse import RawTextHelpFormatter
