@@ -8,8 +8,17 @@ This is a fork of the [DroidBox](https://github.com/pjlantz/droidbox) tool to be
 ### How to install
 
 **0. Requirements**
-- Python 2.7.*, python-tk and python-dev
-- Java 8
+- AndroPyTool has a series of dependencies. You can install all of them by executing:
+    ```sh
+    $ apt-get update
+    $ apt-get install -y --no-install-recommends software-properties-common wget git lib32gcc1 lib32ncurses5 lib32stdc++6 lib32z1 libc6-i386 libgl1-mesa-dev python-pip python-dev gcc python-tk curl
+    $ add-apt-repository ppa:webupd8team/java -y
+    $ apt-get update
+    $ echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+    $ apt-get install -y oracle-java8-installer
+    $ apt-get install -y python-setuptools
+    $ apt-get clean
+    ```
 
 **1. You need to install Android SDK** (go to next step if you already have it)
 The next steps will allow you to install Android SDK in Non-GUI mode:
@@ -35,15 +44,19 @@ The next steps will allow you to install Android SDK in Non-GUI mode:
 - Let's install Android 16, which is the version supported by DroidBox (the platform and system image):
 
     ```sh
-    $ echo "y" | android update sdk -a --no-ui --filter android-16
-    $ echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-16
-    $ echo "y" | android update sdk -a --no-ui --filter platform-tools,tools
+    $ echo y | android update sdk --filter tools --no-ui --force -a
+    $ echo y | android update sdk --filter platform-tools --no-ui --force -a
+    $ echo y | android update sdk --filter android-16 --no-ui --force -a
+    $ echo y | /android update sdk --filter sys-img-armeabi-v7a-android-16 --no-ui -a
     ```
 **3. Let's prepare DroidBox**
-- Now we can start with DroidBox. First, you have to download this repo:
+- Now we can start with DroidBox. First, you have to download this repo and the last release of the original DroidBox repo in order to copy the system and RAM images:
    ```sh
     $ cd
     $ git clone https://github.com/alexMyG/DroidBox-AndroPyTool
+    $ wget https://github.com/pjlantz/droidbox/releases/download/v4.1.1/DroidBox411RC.tar.gz
+    $ tar -zxvf DroidBox411RC.tar.gz
+    $ cp -r DroidBox_4.1.1/images DroidBox_AndroPyTool/images
     ``` 
 - We need to create the device (select **no** when asking if you wish a custom hardware profile):
     ```sh
