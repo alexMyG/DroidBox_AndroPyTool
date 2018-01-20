@@ -7,7 +7,7 @@ from os import listdir
 from scripts import droidbox
 import argparse
 from argparse import RawTextHelpFormatter
-
+from tqdm import tqdm
 # current_directory = os.path.dirname(os.path.realpath(__file__))
 
 # os.chdir(current_directory)
@@ -84,12 +84,12 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
     #print "NUM APKS FOUND: " + str(len(apk_list))
 
     count = 0
-    for apk_name in apk_list:
+    for apk_name in tqdm(apk_list):
         count += 1
-        completed_percentage = "{0:.2f}".format((float(count) / float(len(apk_list)))*100.0)
-        print "\n##########################"
-        print str(completed_percentage) + "% NEW APK: " + apk_name
-        print "##########################"
+        # completed_percentage = "{0:.2f}".format((float(count) / float(len(apk_list)))*100.0)
+        # print "\n##########################"
+        # print str(completed_percentage) + "% NEW APK: " + apk_name
+        # print "##########################"
 
         apk_id = apk_name.split("/")[-1]
 
@@ -97,8 +97,8 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
         json_file_name = "analysis_" + apk_id.replace(".apk", ".json")
 
         if isfile(join(output_directory, log_file_name)) or isfile(join(output_directory, json_file_name)):
-            print "EXISTS: " + output_directory + log_file_name
-            print "!! APK already analysed: " + apk_name
+            # print "EXISTS: " + output_directory + log_file_name
+            # print "!! APK already analysed: " + apk_name
             continue
 
         file_output_log = open(output_directory + log_file_name, "w")
