@@ -536,6 +536,7 @@ def execute_droidbox(argv, logs_directory):
             finally:
                 break
 
+    executionTime = time.time() - timeStamp
 
     PID_STRACE = ""
     output_ps = subprocess.Popen(['adb', 'shell', 'ps'], stdout=subprocess.PIPE)
@@ -585,6 +586,8 @@ def execute_droidbox(argv, logs_directory):
 
     output["hashes"] = hashes
     output["apkName"] = apkName
+
+    output["executionTime"] = executionTime
 
     output_json = json.dumps(output, sort_keys=True, indent=4, separators=(',', ': '))
     output = None
