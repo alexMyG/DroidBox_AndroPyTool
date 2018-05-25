@@ -96,7 +96,7 @@ def analyze_with_droidbox(apks_folders, duration, output_directory, gui):
         log_file_name = "logcat_" + apk_id.replace(".apk", ".txt")
         json_file_name = "analysis_" + apk_id.replace(".apk", ".json")
 
-        if isfile(join(output_directory, log_file_name)) or isfile(join(output_directory, json_file_name)):
+        if isfile(join(output_directory, log_file_name)) and isfile(join(output_directory, json_file_name)):
             # print "EXISTS: " + output_directory + log_file_name
             # print "!! APK already analysed: " + apk_name
             continue
