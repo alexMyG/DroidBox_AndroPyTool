@@ -10,7 +10,8 @@ import shutil
 import ntpath
 import time
 from os.path import join as join_dir
-
+from tqdm import tqdm
+import os.path
 OUTPUT_FOLDER_OLD_FILES = "straceTXT/"
 
 
@@ -57,8 +58,12 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
         os.makedirs(output_other)
 
     # STRACE
-    for file in list_strace_files:
+    for file in tqdm(list_strace_files):
         output_file = ntpath.basename(file).replace(".txt", ".csv").replace("strace_", "").replace(".apk", "")
+
+        if os.path.isfile(output_file):
+            continue
+
         with open(file, "rb") as f:
             lines = f.readlines()
 
