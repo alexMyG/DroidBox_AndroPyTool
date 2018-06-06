@@ -58,10 +58,11 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
         os.makedirs(output_other)
 
     # STRACE
+    print "Strace..."
     for file in tqdm(list_strace_files):
         output_file = ntpath.basename(file).replace(".txt", ".csv").replace("strace_", "").replace(".apk", "")
 
-        if os.path.isfile(join_dir(output_strace, output_file)):
+        if os.path.isfile(output_strace + "/" + output_file):
             continue
 
         with open(file, "rb") as f:
@@ -79,11 +80,13 @@ def parse_droidbox_outputs(source_folder, output_droidbox, output_strace, output
         shutil.move(file, join_dir(output_other, file))
 
     # Droidbox
+    print "DroidBox..."
     for file in list_droidbox_files:
         output_file = ntpath.basename(file).replace("analysis_", "")
         shutil.move(file, join_dir(output_droidbox, output_file))
 
     # Logcat
+    print "Logcat..."
     for file in list_logcat_files:
         output_file = ntpath.basename(file)
         shutil.move(file, join_dir(output_other, output_file))
