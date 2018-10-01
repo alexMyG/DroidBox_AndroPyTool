@@ -1,6 +1,6 @@
 # DroidBox-AndroPyTool
 
-This is a fork of the [DroidBox](https://github.com/pjlantz/droidbox) tool to be used in the [AndroPyTool](https://github.com/AIDA-UAM/AndroPyTool) (coming soon!). It includes new features:
+This is a fork of the [DroidBox](https://github.com/pjlantz/droidbox) tool to be used by [AndroPyTool](https://github.com/alexMyG/AndroPyTool) (coming soon!). It includes new features:
   - Performance improved
   - Possibility of running in Non-GUI mode (ideal for servers)
   - Low level processes monitoring using **Strace**
